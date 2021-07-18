@@ -54,7 +54,10 @@
     <Compile Include="AplicationDBContext.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Pais.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tarjeta.cs" />
+    <Compile Include="Viaje.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
