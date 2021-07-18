@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Practica02_EntityF_ADO_NET.BEAN
 {
-    class TarjetaBEAN
+    class ViajeBEAN
     {
     }
 }

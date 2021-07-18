@@ -14,6 +14,8 @@ namespace Practica02_EntityF_ADO_NET
             string rpta = "N";
 
             ClienteDAO clienteDAO = new ClienteDAO();
+            TarjetaDAO tarjetaDAO = new TarjetaDAO();
+            PaisDAO paisDAO = new PaisDAO();
 
             do
             {
@@ -70,80 +72,119 @@ namespace Practica02_EntityF_ADO_NET
                         rpta = "S";
                         break;
                     case 2:
-                        Console.Clear();
-                        /*
-                        RolBEAN rolBEAN = new RolBEAN();
-                        Console.Write("Ingrese nombre de Rol: ");
-                        rolBEAN.NombreRol = Console.ReadLine();
-                        bool rptaReg = rolDAO.RegistrarRol(rolBEAN);
-                        if (rptaReg)// if(rptaReg==true)
+                        string rpta3 = "N";
+                        do
                         {
-                            Console.WriteLine("Registrado Correctamente.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Errir en registro de Rol");
-                        }
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
-                        */
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("-------- SUBMENU CRUD Tarjeta - EF ------------");
+                            Console.WriteLine("1. Listar.");
+                            Console.WriteLine("2. Registrar.");
+                            Console.WriteLine("3. Actualizar.");
+                            Console.WriteLine("0. Volver.");
+                            Console.WriteLine("\nIngrese Opcion: ");
+                            int opcion2;
+                            opcion2 = Convert.ToInt32(Console.ReadLine());
+                            switch (opcion2)
+                            {
+                                case 1:
+                                    tarjetaDAO.ListaTarjeta();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta3 = Console.ReadLine();
+                                    break;
+
+                                case 2:
+                                    tarjetaDAO.ListaTarjeta();
+                                    tarjetaDAO.RegistrarTarjeta();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta3 = Console.ReadLine();
+                                    break;
+
+                                case 3:
+                                    tarjetaDAO.EditarTarjeta();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta3 = Console.ReadLine();
+                                    break;
+                                case 0:
+                                    rpta3 = "N";
+                                    break;
+                            }
+                        } while (rpta3 == "S" || rpta3 == "s");
+                        rpta = "S";
                         break;
                     case 3:
-                        Console.Clear();
-                        /*
-                        RolBEAN rolBEAN2 = new RolBEAN();
-                        Console.Write("Ingrese nombre de Rol: ");
-                        rolBEAN2.NombreRol = Console.ReadLine();
-                        List<RolBEAN> listaRol = rolDAO.RegistroListaRoles(rolBEAN2);
-                        foreach (var item in listaRol)
+                        string rpta4 = "N";
+                        do
                         {
-                            Console.WriteLine(item.IdRol + "\t" + item.NombreRol);
-                        }
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
-                        */
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("-------- SUBMENU CRUD Pais - EF ------------");
+                            Console.WriteLine("1. Listar.");
+                            Console.WriteLine("2. Registrar.");
+                            Console.WriteLine("3. Actualizar.");
+                            Console.WriteLine("0. Volver.");
+                            Console.WriteLine("\nIngrese Opcion: ");
+                            int opcion2;
+                            opcion2 = Convert.ToInt32(Console.ReadLine());
+                            switch (opcion2)
+                            {
+                                case 1:
+                                    paisDAO.ListaPais();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta4 = Console.ReadLine();
+                                    break;
+
+                                case 2:
+                                    paisDAO.ListaPais();
+                                    paisDAO.RegistrarPais();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta4 = Console.ReadLine();
+                                    break;
+
+                                case 3:
+                                    paisDAO.EditarPais();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta4 = Console.ReadLine();
+                                    break;
+                                case 0:
+                                    rpta2 = "N";
+                                    break;
+                            }
+                        } while (rpta4 == "S" || rpta4 == "s");
+                        rpta = "S";
                         break;
                     case 4:
-                        Console.Clear();
-                        /*
-                        Console.Write("Ingrese ID de Rol a buscar: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
-                        RolBEAN rolBEAN3 = new RolBEAN();
-                        rolBEAN3 = rolDAO.BuscarRolID(id);
-                        if (rolBEAN3.IdRol == 0)
+                        string rpta5 = "N";
+                        do
                         {
-                            Console.WriteLine("Los registros con el Id en mencion no existen. ");
-                        }
-                        else
-                        {
-                            Console.WriteLine(rolBEAN3.IdRol + "  " + rolBEAN3.NombreRol);
-                        }
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
-                        */
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("-------- SUBMENU CRUD Viaje - ADO. NET. ------------");
+                            Console.WriteLine("1. Listar.");
+                            Console.WriteLine("2. Registrar.");
+                            Console.WriteLine("0. Volver.");
+                            Console.WriteLine("\nIngrese Opcion: ");
+                            int opcion2;
+                            opcion2 = Convert.ToInt32(Console.ReadLine());
+                            switch (opcion2)
+                            {
+                                case 1:
+                                    clienteDAO.ListaCliente();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta5 = Console.ReadLine();
+                                    break;
+
+                                case 2:
+                                    clienteDAO.ListaCliente();
+                                    clienteDAO.RegistrarCliente();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta5 = Console.ReadLine();
+                                    break;
+                                case 0:
+                                    rpta5 = "N";
+                                    break;
+                            }
+                        } while (rpta5 == "S" || rpta5 == "s");
+                        rpta = "S";
                         break;
                     default:
-                        break;
-                    case 5:
-                        /*
-                        using (var db = new connBD_CONTACTABILIDAD())
-                        {
-                            List<tb_Rol> listaRoles = db.tb_Rol.ToList();
-                            foreach (var item in listaRoles)
-                            {
-                                Console.WriteLine(item.idRol + "\t" + item.nombreRol);
-                            }
-
-                        }
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
-                        */
                         break;
                     case 0:
                         rpta = "N";

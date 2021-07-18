@@ -52,9 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BEAN\ClienteBEAN.cs" />
-    <Compile Include="BEAN\PaisBEAN.cs" />
-    <Compile Include="BEAN\TarjetaBEAN.cs" />
+    <Compile Include="BEAN\ViajeBEAN.cs" />
     <Compile Include="DAO\ClienteDAO.cs" />
     <Compile Include="DAO\Model1.Context.cs">
       <AutoGen>True</AutoGen>
