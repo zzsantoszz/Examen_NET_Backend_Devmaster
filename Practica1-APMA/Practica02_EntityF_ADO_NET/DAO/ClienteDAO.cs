@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,25 @@ namespace Practica02_EntityF_ADO_NET.DAO
 
         public void RegistrarCliente()
         {
+            string format = "MM/dd/yyyy";
+
             Console.Clear();
-            Console.WriteLine("Lista de Cliente: ");
-            string nombreCat = Console.ReadLine();
-            tb_Categoria cat = new tb_Categoria { nombreCategoria = nombreCat };
-            using (var db = new BD_CONTACTABILIDADEntities())
+            Console.WriteLine("Registrar Cliente: ");
+            Console.WriteLine("Nombre: ");
+            string nombrecliente = Console.ReadLine();
+            Console.WriteLine("Apellido: ");
+            string apellidocliente = Console.ReadLine();
+            Console.WriteLine("Fecha Nacimiento: ");
+            string fechanacimiento = Console.ReadLine();
+            DateTime dateTime = DateTime.ParseExact(fechanacimiento, format, CultureInfo.InvariantCulture);
+            //Console.WriteLine(dateTime);
+            Console.WriteLine("DNI: ");
+            string dni = Console.ReadLine();
+
+            tbCliente datcliente = new tbCliente { nombreCliente = nombrecliente, apellidosCliente = apellidocliente, fechaNacimiento = dateTime, dniCliente = dni };
+            using (var db = new connBD_Practica1())
             {
-                db.tb_Categoria.Add(cat);
+                db.tbCliente.Add(datcliente);
                 db.SaveChanges();
             }
         }
@@ -39,16 +52,17 @@ namespace Practica02_EntityF_ADO_NET.DAO
         public void EditarCliente()
         {
             Console.Clear();
-            Console.Write("Ingrese el ID de Categoria a editar: ");
-            int idCat = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Ingrese el nuevo nombre: ");
-            string nombreCat = Console.ReadLine();
-            using (var db = new BD_CONTACTABILIDADEntities())
+            Console.WriteLine("Editar nombre de cliente: ");
+            Console.Write("Ingrese el ID del Cliente: ");
+            int idCliente = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Ingrese el nuevo nombre de cliente: ");
+            string nombrenewcliente = Console.ReadLine();
+            using (var db = new connBD_Practica1())
             {
-                tb_Categoria cat = db.tb_Categoria.Find(idCat);
-                cat.nombreCategoria = nombreCat;
+                tbCliente datcliente = db.tbCliente.Find(idCliente);
+                datcliente.nombreCliente = nombrenewcliente;
                 db.SaveChanges();
-                Console.Write("El registro con codigo " + idCat + " se edito correctamente.");
+                Console.Write("El id cliente "+ idCliente +" se registro con el nombre " + nombrenewcliente + " satisfacotriamente.");
             }
         }
     }

@@ -46,38 +46,28 @@ namespace Practica02_EntityF_ADO_NET
                             {
                                 case 1:
                                     clienteDAO.ListaCliente();
-                                    Console.Write("¿Desa continuar? (S/N) ");
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     clienteDAO.ListaCliente();
                                     clienteDAO.RegistrarCliente();
-                                    Console.Write("¿Desa continuar? (S/N) ");
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
 
                                 case 3:
-
+                                    clienteDAO.EditarCliente();
+                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    rpta2 = Console.ReadLine();
+                                    break;
                                 case 0:
                                     rpta2 = "N";
                                     break;
                             }
                         } while (rpta2 == "S" || rpta2 == "s") ;
                         rpta = "S";
-                        /*
-                        List<RolBEAN> ListaRol = new List<RolBEAN>();
-                        ListaRol = rolDAO.ListaRoles();
-                        Console.Clear();
-                        Console.WriteLine("Lista Roles");
-                        foreach (var item in ListaRol)
-                        {
-                            Console.WriteLine(item.IdRol + "\t" + item.NombreRol);
-                        }
-                        Console.Write("¿Desa continuar? (S/N) ");
-                        rpta = Console.ReadLine();
-                        */
-
                         break;
                     case 2:
                         Console.Clear();
