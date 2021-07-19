@@ -1,4 +1,5 @@
-﻿using Practica02_EntityF_ADO_NET.DAO;
+﻿using Practica02_EntityF_ADO_NET.BEAN;
+using Practica02_EntityF_ADO_NET.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Practica02_EntityF_ADO_NET
             ClienteDAO clienteDAO = new ClienteDAO();
             TarjetaDAO tarjetaDAO = new TarjetaDAO();
             PaisDAO paisDAO = new PaisDAO();
+            ViajeDAO viajeDAO = new ViajeDAO();
 
             do
             {
@@ -48,20 +50,20 @@ namespace Practica02_EntityF_ADO_NET
                             {
                                 case 1:
                                     clienteDAO.ListaCliente();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     clienteDAO.ListaCliente();
                                     clienteDAO.RegistrarCliente();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
 
                                 case 3:
                                     clienteDAO.EditarCliente();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
                                 case 0:
@@ -88,20 +90,20 @@ namespace Practica02_EntityF_ADO_NET
                             {
                                 case 1:
                                     tarjetaDAO.ListaTarjeta();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     tarjetaDAO.ListaTarjeta();
                                     tarjetaDAO.RegistrarTarjeta();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
 
                                 case 3:
                                     tarjetaDAO.EditarTarjeta();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
                                 case 0:
@@ -128,20 +130,20 @@ namespace Practica02_EntityF_ADO_NET
                             {
                                 case 1:
                                     paisDAO.ListaPais();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     paisDAO.ListaPais();
                                     paisDAO.RegistrarPais();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
 
                                 case 3:
                                     paisDAO.EditarPais();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
                                 case 0:
@@ -166,15 +168,30 @@ namespace Practica02_EntityF_ADO_NET
                             switch (opcion2)
                             {
                                 case 1:
-                                    clienteDAO.ListaCliente();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    List<ViajeBEAN> listaViaje = new List<ViajeBEAN>();
+                                    listaViaje = viajeDAO.listaViajes();
+                                    Console.Clear();
+                                    Console.WriteLine("Lista Viaje: ");
+                                    foreach (var item in listaViaje)
+                                    {
+                                        Console.WriteLine(item.IdViaje + "\t" + item.IdTarjeta + "\t" + item.IdPais + "\t" + item.Fechainicioviaje + "\t" + item.Fechafinviaje + "\t" + item.EstadoViaje);
+                                    }
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta5 = Console.ReadLine();
                                     break;
 
                                 case 2:
-                                    clienteDAO.ListaCliente();
-                                    clienteDAO.RegistrarCliente();
-                                    Console.Write("¿Desa volver al SUMENU? (S/N) ");
+                                    tarjetaDAO.ListaTarjeta();
+                                    paisDAO.ListaPais();
+                                    ViajeBEAN viajeBEAN2 = new ViajeBEAN();
+                                    Console.Write("Ingrese idTarjeta: ");
+                                    viajeBEAN2.IdViaje = Convert.ToInt32(Console.ReadLine());
+                                    List<ViajeBEAN> listaRol = viajeDAO.RegistroListaViaje(viajeBEAN2);
+                                    foreach (var item in listaRol)
+                                    {
+                                        Console.WriteLine(item.IdViaje + "\t" + item.IdTarjeta + "\t" + item.IdPais + "\t" + item.Fechainicioviaje + "\t" + item.Fechafinviaje + "\t" + item.EstadoViaje);
+                                    }
+                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
                                     rpta5 = Console.ReadLine();
                                     break;
                                 case 0:
