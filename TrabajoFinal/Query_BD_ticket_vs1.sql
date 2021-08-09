@@ -623,8 +623,8 @@ select asunto_descripcion_ticket
 from tb_asunto_ticket
 where codigo_asunto = @codigo_asunto;
 
-exec SP_BUSCAR_ASUNTO_TICKET 'CA05';
-select * from tb_asunto_ticket;
+--exec SP_BUSCAR_ASUNTO_TICKET 'CA05';
+--select * from tb_asunto_ticket;
 
 ------------------------------------------------------------------------------------------------------
 -----LISTAR ASUNTO TICKET-----------------------------------------------------------------------------
