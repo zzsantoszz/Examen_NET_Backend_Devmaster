@@ -414,16 +414,17 @@ returns int
    )
    return @idTipousuario
  end;
+--select dbo.SF_BUSCAR_TIPO_USUARIO('Cliente');
 
 CREATE PROCEDURE SP_REGISTRAR_USUARIO
 (@user_acceso varchar(50), @pass varchar(50), @nombre_tipo_usuario varchar(50))
 AS
 DECLARE @idTipousuario int;
-SET @idTipousuario = (select dbo.SP_BUSCAR_TIPO_USUARIO(@nombre_tipo_usuario))
+SET @idTipousuario = (select dbo.SF_BUSCAR_TIPO_USUARIO(@nombre_tipo_usuario));
 INSERT INTO [dbo].[tb_usuario]([user_acceso], [user_pass], [idTipo_usuario], [estado_usuario])
 values (@user_acceso,PWDENCRYPT(@pass),@idTipousuario,1);
+--exec DBO.SP_REGISTRAR_USUARIO 'jmoreno','123456','Cliente';
 
---exec SP_REGISTRAR_USUARIO 'jmoreno','123456','Cliente';
 /*
 select * from tb_usuario;
 select * from tb_tipo_usuario;
@@ -491,7 +492,6 @@ as
 select u.user_acceso,tu.nombre_tipo_usuario
 from tb_usuario u, tb_tipo_usuario tu
 where u.idTipo_usuario = tu.idTipo_usuario;
-
 --exec SP_LISTAR_USUARIO;
 
 ------------------------------------------------------------------------------------------------------
