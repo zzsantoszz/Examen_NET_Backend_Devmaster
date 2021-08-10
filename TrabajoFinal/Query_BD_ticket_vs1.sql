@@ -438,6 +438,17 @@ select *
 from tb_usuario
 where PWDCOMPARE('12345678', user_pass)= 1;
 */
+CREATE PROCEDURE SP_REGISTRAR_LISTAR_USUARIO
+(@user_acceso varchar(50), @pass varchar(50), @nombre_tipo_usuario varchar(50))
+AS
+DECLARE @idTipousuario int;
+SET @idTipousuario = (select dbo.SF_BUSCAR_TIPO_USUARIO(@nombre_tipo_usuario));
+INSERT INTO [dbo].[tb_usuario]([user_acceso], [user_pass], [idTipo_usuario], [estado_usuario])
+values (@user_acceso,PWDENCRYPT(@pass),@idTipousuario,1);
+exec SP_LISTAR_USUARIO;
+
+--exec DBO.SP_REGISTRAR_LISTAR_USUARIO 'jhomero','123456','Cliente';
+
 
 ------------------------------------------------------------------------------------------------------
 -----EDITAR USUARIO-----------------------------------------------------------------------------------

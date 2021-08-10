@@ -1,4 +1,5 @@
-﻿using DAO.DAO;
+﻿using DAO.BEAN;
+using DAO.DAO;
 using DAO.Modelo;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,9 @@ namespace DAO
                             Console.WriteLine("-------- SUBMENU CRUD Usuario ------------");
                             Console.WriteLine("1. Listar.");
                             Console.WriteLine("2. Registrar.");
+                            Console.WriteLine("4. Registrar y listar.");
                             Console.WriteLine("3. Actualizar.");
+                            Console.WriteLine("5. Buscar.");
                             Console.WriteLine("0. Volver.");
                             Console.WriteLine("\nIngrese Opcion: ");
                             int opcion2;
@@ -60,21 +63,70 @@ namespace DAO
                             switch (opcion2)
                             {
                                 case 1:
-                                    usuarioDAO.ListaUsuario();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    //usuarioDAO.ListaUsuario();//EF
+                                    List<UsuarioBEAN> listausuario = new List<UsuarioBEAN>();
+                                    listausuario = usuarioDAO.listaUsuario_ADO();
+                                    Console.Clear();
+                                    Console.WriteLine("Lista Usuario: ");
+                                    Console.WriteLine("\nUsername \t\t Tipo_usuario\n");
+                                    foreach (var item in listausuario)
+                                    {
+                                        Console.WriteLine(item.user_name + "\t\t\t" + item.tipo_usuario);
+                                    }
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
 
                                 case 2:
-                                    //clienteDAO.ListaCliente();
-                                    //clienteDAO.RegistrarCliente();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    Console.Clear();
+                                    UsuarioBEAN usuarioBEAN = new UsuarioBEAN();
+                                    Console.Write("Ingrese el username: ");
+                                    usuarioBEAN.user_name = Console.ReadLine();
+                                    Console.Write("Ingrese el pass: ");
+                                    usuarioBEAN.pass_name = Console.ReadLine();
+                                    Console.Write("Ingrese el tipo de usuario: ");
+                                    usuarioBEAN.tipo_usuario = Console.ReadLine();
+                                    bool rptaReg = usuarioDAO.registoUsuario_ADO(usuarioBEAN);
+                                    if (rptaReg)
+                                    {
+                                        Console.WriteLine("Registrado correctamente.");                                       
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Error en el registro de Usuario.");
+                                    }
+
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
+                                case 4:
+                                    Console.Clear();
+                                    UsuarioBEAN usuarioBEAN2 = new UsuarioBEAN();
+                                    Console.Write("Ingrese el username: ");
+                                    usuarioBEAN2.user_name = Console.ReadLine();
+                                    Console.Write("Ingrese el pass: ");
+                                    usuarioBEAN2.pass_name = Console.ReadLine();
+                                    Console.Write("Ingrese el tipo de usuario: ");
+                                    usuarioBEAN2.tipo_usuario = Console.ReadLine();
+                                    
+                                    List<UsuarioBEAN> listausuario2 = usuarioDAO.registroListadoUsuario(usuarioBEAN2);
+                                    Console.WriteLine("\nUsername \t\t Tipo_usuario\n");
+                                    foreach (var item in listausuario2)
+                                    {
+                                        Console.WriteLine(item.user_name + "\t\t\t" + item.tipo_usuario);
+                                    }
 
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
+                                    rpta2 = Console.ReadLine();
+                                    break;
                                 case 3:
-                                    //clienteDAO.EditarCliente();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    //
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
+                                    rpta2 = Console.ReadLine();
+                                    break;
+                                case 5:
+                                    //
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
                                 case 0:
@@ -100,21 +152,21 @@ namespace DAO
                             switch (opcion2)
                             {
                                 case 1:
-                                    //tarjetaDAO.ListaTarjeta();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    categoriaDAO.ListaCategoria();
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     //tarjetaDAO.ListaTarjeta();
                                     //tarjetaDAO.RegistrarTarjeta();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
 
                                 case 3:
                                     //tarjetaDAO.EditarTarjeta();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta3 = Console.ReadLine();
                                     break;
                                 case 0:
@@ -140,21 +192,21 @@ namespace DAO
                             switch (opcion2)
                             {
                                 case 1:
-                                    //paisDAO.ListaPais();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    asuntoDAO.ListaAsunto();
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
 
                                 case 2:
                                     //paisDAO.ListaPais();
                                     //paisDAO.RegistrarPais();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
 
                                 case 3:
                                     //paisDAO.EditarPais();
-                                    Console.Write("¿Desa volver al SUBMENU? (S/N) ");
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta4 = Console.ReadLine();
                                     break;
                                 case 0:

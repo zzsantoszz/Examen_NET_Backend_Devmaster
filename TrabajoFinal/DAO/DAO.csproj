@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BEAN\UsuarioBEAN.cs" />
     <Compile Include="DAO\AsuntoDAO.cs" />
     <Compile Include="DAO\CategoriaDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />

@@ -14,16 +14,16 @@ namespace DAO.DAO
         string _stringConnection = ConfigurationManager.ConnectionStrings["connBD_ADO"].ConnectionString;  //conexion para ADO
         #endregion
 
-        public void ListaUsuario()//EF
+        public void ListaAsunto()//EF
         {
             Console.Clear();
             using (var db = new connBD_EF())
             {
-                List<tb_usuario> listacliente = db.tb_usuario.ToList();
-                Console.WriteLine("Id Usuario \t Codigo_Usuario \t User \t\t Tipo_usuario \t\t\t Estado");
-                foreach (var item in listacliente)
+                List<tb_asunto_ticket> listaasunto = db.tb_asunto_ticket.ToList();
+                Console.WriteLine("Id_Asunto \t Codigo_Asunto \t\t Descripcion");
+                foreach (var item in listaasunto)
                 {
-                    Console.WriteLine(item.idUsuario + "\t\t" + item.cod_usuario + "\t\t\t" + item.user_acceso + "\t\t\t" + item.idTipo_usuario + "\t\t" + item.estado_usuario);
+                    Console.WriteLine(item.idAsunto_ticket + "\t\t" + item.codigo_asunto + "\t\t\t" + item.asunto_descripcion_ticket);
                 }
 
             }
