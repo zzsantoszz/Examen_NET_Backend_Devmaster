@@ -125,6 +125,91 @@ namespace DAO.DAO
                 throw;
             }
             return lista;
-        } 
+        }
+
+        public Boolean editarUsuario_ADO(UsuarioBEAN usuario_edicion) //Editar ADO
+        {
+            bool rpta = false;
+            try
+            {
+                using (var conexion = new SqlConnection(_stringConnection))
+                {
+                    using (var comando = new SqlCommand("SP_EDITAR_USUARIO", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@user_acceso_old", usuario_edicion.user_name);
+                        comando.Parameters.AddWithValue("@user_acceso_new", usuario_edicion.user_name_new);
+                        comando.Parameters.AddWithValue("@pass", usuario_edicion.pass_name);
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        rpta = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            return rpta;
+        }
+
+        public List<UsuarioBEAN> editarListadoUsuario(UsuarioBEAN usuario_edicion_list) //Editar editar_listar ADO
+        {
+            List<UsuarioBEAN> lista = new List<UsuarioBEAN>();
+            UsuarioBEAN usuario_list;
+
+            try
+            {
+                using (var conexion = new SqlConnection(_stringConnection))
+                {
+                    using (var comando = new SqlCommand("SP_EDITAR_LISTAR_USUARIO", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@user_acceso_old", usuario_edicion_list.user_name);
+                        comando.Parameters.AddWithValue("@user_acceso_new", usuario_edicion_list.user_name_new);
+                        comando.Parameters.AddWithValue("@pass", usuario_edicion_list.pass_name);
+                        conexion.Open();
+                        using (var datos = comando.ExecuteReader())
+                        {
+                            while (datos.Read())
+                            {
+                                usuario_list = new UsuarioBEAN();
+                                usuario_list.user_name = Convert.ToString(datos[0]);
+                                usuario_list.tipo_usuario = Convert.ToString(datos[1]);
+                                lista.Add(usuario_list);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return lista;
+        }
+
+        public UsuarioBEAN buscarUsuario_username(string user_name) //Buscar usuario ADO
+        {
+            UsuarioBEAN usuario = new UsuarioBEAN();
+            using (var conexion = new SqlConnection(_stringConnection))
+            {
+                using (var comando = new SqlCommand("SP_BUSCAR_USUARIO", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@user_acceso", user_name);
+                    conexion.Open();
+                    using (var datos = comando.ExecuteReader())
+                    {
+                        while (datos.Read())
+                        {
+                            usuario.user_name = datos[0].ToString();
+                            usuario.nombre_tipo_usuario = datos[1].ToString();
+                        }
+                    }
+                }
+            }
+            return usuario;
+        }
     }
 }

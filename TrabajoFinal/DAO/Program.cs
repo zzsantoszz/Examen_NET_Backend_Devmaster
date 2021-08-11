@@ -54,7 +54,8 @@ namespace DAO
                             Console.WriteLine("1. Listar.");
                             Console.WriteLine("2. Registrar.");
                             Console.WriteLine("4. Registrar y listar.");
-                            Console.WriteLine("3. Actualizar.");
+                            Console.WriteLine("3. Editar.");
+                            Console.WriteLine("6. Editar y listar.");
                             Console.WriteLine("5. Buscar.");
                             Console.WriteLine("0. Volver.");
                             Console.WriteLine("\nIngrese Opcion: ");
@@ -63,7 +64,9 @@ namespace DAO
                             switch (opcion2)
                             {
                                 case 1:
+                                    //Listar Usuario
                                     //usuarioDAO.ListaUsuario();//EF
+                                    Console.Clear();
                                     List<UsuarioBEAN> listausuario = new List<UsuarioBEAN>();
                                     listausuario = usuarioDAO.listaUsuario_ADO();
                                     Console.Clear();
@@ -78,6 +81,7 @@ namespace DAO
                                     break;
 
                                 case 2:
+                                    //Registrar Usuario
                                     Console.Clear();
                                     UsuarioBEAN usuarioBEAN = new UsuarioBEAN();
                                     Console.Write("Ingrese el username: ");
@@ -100,6 +104,7 @@ namespace DAO
                                     rpta2 = Console.ReadLine();
                                     break;
                                 case 4:
+                                    //Registrar y listar Usuario
                                     Console.Clear();
                                     UsuarioBEAN usuarioBEAN2 = new UsuarioBEAN();
                                     Console.Write("Ingrese el username: ");
@@ -120,12 +125,67 @@ namespace DAO
                                     rpta2 = Console.ReadLine();
                                     break;
                                 case 3:
-                                    //
+                                    //Editar Usuario
+                                    Console.Clear();
+                                    UsuarioBEAN usuarioBEAN3 = new UsuarioBEAN();
+                                    Console.Write("Ingrese el username: ");
+                                    usuarioBEAN3.user_name = Console.ReadLine();
+                                    Console.Write("Ingrese el nuevo username: ");
+                                    usuarioBEAN3.user_name_new = Console.ReadLine();
+                                    Console.Write("Ingrese el nuevo pass: ");
+                                    usuarioBEAN3.pass_name = Console.ReadLine();
+                                    bool rptaReg2 = usuarioDAO.editarUsuario_ADO(usuarioBEAN3);
+                                    if (rptaReg2)
+                                    {
+                                        Console.WriteLine("Se edito correctamente el Usuario.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Error en la edicion del registro de Usuario.");
+                                    }
+
+                                    Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
+                                    rpta2 = Console.ReadLine();
+                                    break;
+                                case 6:
+                                    //Editar y listar Usuario
+                                    Console.Clear();
+                                    UsuarioBEAN usuarioBEAN4 = new UsuarioBEAN();
+                                    Console.Write("Ingrese el username: ");
+                                    usuarioBEAN4.user_name = Console.ReadLine();
+                                    Console.Write("Ingrese el nuevo username: ");
+                                    usuarioBEAN4.user_name_new = Console.ReadLine();
+                                    Console.Write("Ingrese el nuevo pass: ");
+                                    usuarioBEAN4.pass_name = Console.ReadLine();
+        
+                                    List<UsuarioBEAN> listausuario3 = usuarioDAO.editarListadoUsuario(usuarioBEAN4);
+                                    Console.WriteLine("\nUsername \t\t Tipo_usuario\n");
+                                    foreach (var item in listausuario3)
+                                    {
+                                        Console.WriteLine(item.user_name + "\t\t\t" + item.tipo_usuario);
+                                    }
+
                                     Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;
                                 case 5:
-                                    //
+                                    //Buscar Usuario
+                                    Console.Clear();
+                                    UsuarioBEAN usuarioBEAN5 = new UsuarioBEAN();
+                                    Console.Write("Ingrese el username a buscar: ");
+                                    string user_name = Console.ReadLine();
+                                    usuarioBEAN5 = usuarioDAO.buscarUsuario_username(user_name);
+
+                                    if (usuarioBEAN5.user_name == null)// cuando es int en vez de null se pone 0
+                                    {
+                                        Console.WriteLine("\nLos registros con el username ( "+ user_name +" ) no existen.\n");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("\nUsername \t\t Tipo_usuario\n");
+                                        Console.WriteLine(usuarioBEAN5.user_name + "\t\t\t" + usuarioBEAN5.nombre_tipo_usuario);
+                                    }                                 
+                                    
                                     Console.Write("\n¿Desa volver al SUBMENU? (S/N) ");
                                     rpta2 = Console.ReadLine();
                                     break;

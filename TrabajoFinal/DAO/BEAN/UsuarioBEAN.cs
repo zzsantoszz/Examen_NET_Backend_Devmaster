@@ -12,5 +12,8 @@ namespace DAO.BEAN
         public string pass_name { get; set; }
 
         public string tipo_usuario { get; set; }
+        public string user_name_new { get; set; }
+        public string nombre_tipo_usuario { get; set; }
+
     }
 }
