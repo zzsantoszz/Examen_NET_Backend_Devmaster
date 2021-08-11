@@ -1,0 +1,31 @@
+﻿@using DAO.Modelo
+@model List<tb_usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Lista de Categorias</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Codigo</td>
+            <td>Username</td>
+            <td>Tipo Usuario</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idUsuario</td>
+                <td>@item.cod_usuario</td>
+                <td>@item.user_acceso</td>
+                <td>@item.idTipo_usuario</td>
+            </tr>
+        }
+    </tbody>
+</table>
