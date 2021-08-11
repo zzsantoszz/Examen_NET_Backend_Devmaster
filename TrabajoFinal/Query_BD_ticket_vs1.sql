@@ -462,8 +462,18 @@ update [dbo].[tb_usuario]
 set user_acceso=@user_acceso_new, user_pass=@user_pass
 where @user_acceso_old=user_acceso;
 --exec SP_EDITAR_USUARIO 'jalvarez','jalvarez','12345678';
---select * from tb_usuario;
+select * from tb_usuario;
 --select * from tb_tipo_usuario;
+
+CREATE PROCEDURE SP_EDITAR_LISTAR_USUARIO
+(@user_acceso_old varchar(50), @user_acceso_new varchar(50), @pass varchar(50))
+AS
+declare @user_pass [varbinary](max);
+set @user_pass=PWDENCRYPT(@pass);
+update [dbo].[tb_usuario]
+set user_acceso=@user_acceso_new, user_pass=@user_pass
+where @user_acceso_old=user_acceso;
+exec SP_LISTAR_USUARIO;
 
 ------------------------------------------------------------------------------------------------------
 -----BUSCAR USUARIO-----------------------------------------------------------------------------------
@@ -471,10 +481,11 @@ where @user_acceso_old=user_acceso;
 CREATE PROCEDURE SP_BUSCAR_USUARIO
 (@user_acceso varchar(50))
 AS
-select u.user_acceso
-from tb_usuario u
-where @user_acceso = u.user_acceso;
---exec SP_BUSCAR_USUARIO 'amorales';
+select u.user_acceso,tu.nombre_tipo_usuario
+from tb_usuario u, tb_tipo_usuario tu
+where @user_acceso = u.user_acceso
+and u.idTipo_usuario = tu.idTipo_usuario;
+--exec SP_BUSCAR_USUARIO 'amoral';
 
 CREATE FUNCTION SF_BUSCAR_USUARIO
 (@user_acceso varchar(50))
